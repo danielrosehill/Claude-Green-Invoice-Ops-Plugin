@@ -65,6 +65,22 @@ Always confirm the resolved client and line items back to the user **before** cr
 - JWT expiry: the MCP refreshes automatically; if you see an auth error twice in a row, tell the user to check the API credentials.
 - Missing required fields: the API error usually names the field — surface it verbatim rather than guessing.
 
+## Fallback resources
+
+If the Green Invoice MCP appears broken, out of date, or missing an endpoint the user needs, do **not** silently give up — fall back to one of these third-party surfaces over the same API. Green Invoice has since rebranded to **Morning** (`greeninvoice.co.il`), and these projects track the current API.
+
+Preference order:
+
+1. **[`morning-cli`](https://github.com/Jango-AI-com/morning-cli)** (JangoAI) — agent-native Python CLI covering all 66 endpoints, with JSON envelopes designed for AI consumption, an interactive REPL, and onboarding wizard. Install: `pip install morning-cli`. Use when the MCP fails on a specific endpoint or when you need a quick one-shot call from the shell.
+2. **[`D1DX/morning-skill`](https://github.com/D1DX/morning-skill)** (D1DX) — full API skill for AI agents. Clients/suppliers/items/documents/payments/business/reference-data run through `morning-cli`; expenses, file upload with OCR, and classifications are documented as raw API Python patterns against the official Apiary spec. Use when you need the two-step presigned-S3 expense-upload flow or bulk expense imports — scenarios the MCP does not cover well.
+
+Rules when falling back:
+
+- Tell the user you are switching away from the MCP and why (e.g. "the MCP returned a schema error on `expense.create`, dropping to `morning-cli`").
+- Credentials live in the same Green Invoice API ID / Secret pair — do not re-prompt unless the tool fails auth.
+- If you use raw API calls (from the `morning-skill` patterns), remember: sandbox vs. production base URL, `requests` library required for multipart uploads, and expense file processing is async (5–15 s) — poll before reporting success.
+- Keep mutation safety rules identical to the MCP path: confirm before `create` / `close` / `delete`.
+
 ## Disclaimer
 
-The underlying MCP is unofficial and not affiliated with Green Invoice (Optimax Ltd). Always verify consequential operations (closing invoices, issuing credit notes, bulk edits) in the official Green Invoice dashboard afterward.
+The underlying MCP is unofficial and not affiliated with Green Invoice / Morning (Optimax Ltd). The fallback resources above are likewise third-party. Always verify consequential operations (closing invoices, issuing credit notes, bulk edits) in the official Morning dashboard afterward.
