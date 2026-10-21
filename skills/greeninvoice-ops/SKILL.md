@@ -62,7 +62,13 @@ Always confirm the resolved client and line items back to the user **before** cr
 ## Error handling
 
 - Rate limit (~3 req/s): batch lookups instead of looping one-by-one.
-- JWT expiry: the MCP refreshes automatically; if you see an auth error twice in a row, tell the user to check the API credentials.
+- JWT expiry: the MCP refreshes automatically.
+- **`Auth failed (404):` with an empty body is not a bad key.** Green Invoice (Morning) moved
+  token issuing to OAuth (`POST https://api.morning.co/idp/v1/oauth/token`, client
+  credentials) in October 2026, and the old `/account/token` route returns 404 for every key.
+  The MCP needs version 0.3.2 or later. Until it's updated, fall back to `morning-cli`
+  (below), which already uses the OAuth route. A 401 or 403 after a successful token *is* a
+  credentials or permissions problem.
 - Missing required fields: the API error usually names the field — surface it verbatim rather than guessing.
 
 ## Fallback resources
