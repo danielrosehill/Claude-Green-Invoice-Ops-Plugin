@@ -11,16 +11,16 @@ This skill guides operations against the **Green Invoice MCP** server (unofficia
 
 The Green Invoice MCP server must be installed and connected. Tools are exposed under an `*greeninvoice*` namespace with eleven consolidated entry points (server: [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP), npm `greeninvoice-mcp`):
 
-- `account` — account info and settings
+- `account` — account info (answers 403 for API-key auth on the accounts tested; use `business get`)
 - `business` — business config, numbering, file uploads
 - `client` — client CRUD, search, merge, balance
-- `document` — invoices, receipts, quotes (create, search, update, close, reopen, send, preview)
+- `document` — invoices, receipts, quotes (create, search, update, close, reopen, preview, download links)
 - `expense` — expense tracking, drafts, accounting classifications, `upload_file` (a receipt image/PDF that Green Invoice OCRs into a draft)
 - `item` — product/service catalog
-- `payment` — payment forms, credit-card tokens, payment links
+- `payment` — hosted payment forms, credit-card tokens
 - `reference_data` — business categories, countries, cities, FX rates
 - `supplier` — supplier CRUD, search, merge
-- `webhook` — webhook subscriptions
+- `webhook` — the event topics and delivery signature check (webhooks themselves are set up in the Green Invoice web app, not the API)
 - `sandbox` — test documents in Green Invoice's separate test environment (needs its own sandbox keys; never touches the real books)
 
 Each tool takes an `action` argument (e.g. `search`, `create`, `get`, `update`, `close`) plus action-specific parameters. If you are unsure which action a tool supports, call it with no arguments or with a deliberately invalid action to get a schema error listing the valid ones.
@@ -46,10 +46,13 @@ Always confirm the resolved client and line items back to the user **before** cr
 2. `expense` with `action: search`, same date range.
 3. Aggregate totals by currency; report VAT collected vs. VAT paid.
 
-### 4. Send an existing invoice
+### 4. Email an invoice
 
-1. `document` with `action: search` to locate the document ID.
-2. `document` with `action: send` and recipient emails.
+The API has no send call. Green Invoice emails a document only when it is created, to `client.emails` on `document create`, so ask about recipients before creating. For an existing document, get `document` `action: download_links` and send the link with the environment's email tool (`/gi-send-document`).
+
+### 5. Record a payment against an invoice
+
+There is no add-payment call. Issue a receipt (type 400) with `payment` rows and `linkedDocumentIds: [invoiceId]`, which also closes the invoice. Confirm first, like any document.
 
 ## Safety rules
 

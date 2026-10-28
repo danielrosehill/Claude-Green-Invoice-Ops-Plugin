@@ -1,6 +1,6 @@
 {
   "name": "greeninvoice-ops",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Operational commands and a skill for working with the Green Invoice MCP server — invoices, clients, expenses, and monthly summaries.",
   "author": {
     "name": "Daniel Rosehill",
@@ -8,5 +8,11 @@
   },
   "repository": "https://github.com/danielrosehill/Claude-Green-Invoice-Ops-Plugin",
   "license": "MIT",
-  "keywords": ["greeninvoice", "accounting", "invoicing", "israel", "mcp"]
+  "keywords": [
+    "greeninvoice",
+    "accounting",
+    "invoicing",
+    "israel",
+    "mcp"
+  ]
 }

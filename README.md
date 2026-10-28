@@ -6,7 +6,7 @@ Bundles a skill that teaches Claude how to safely drive the eleven consolidated 
 
 ## Prerequisite
 
-The Green Invoice MCP server must be installed and connected. See [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP) for installation and API-credential setup. It is published on npm as [`greeninvoice-mcp`](https://www.npmjs.com/package/greeninvoice-mcp) (`npx -y greeninvoice-mcp`); this plugin is written against 0.4.0.
+The Green Invoice MCP server must be installed and connected. See [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP) for installation and API-credential setup. It is published on npm as [`greeninvoice-mcp`](https://www.npmjs.com/package/greeninvoice-mcp) (`npx -y greeninvoice-mcp`); this plugin is written against 0.5.0.
 
 ## Skills
 
@@ -19,7 +19,7 @@ The Green Invoice MCP server must be installed and connected. See [GreenInvoice-
 - `/gi-recent-documents` — list recent invoices, receipts, quotes with optional filters
 - `/gi-create-invoice` — interactive invoice creation with confirmation gate
 - `/gi-log-expense` — log a new expense against a supplier
-- `/gi-send-document` — send an existing document by email
+- `/gi-send-document` — email an existing document's download link
 - `/gi-monthly-summary` — income, expenses, VAT position, top clients / suppliers
 
 ## Installation
