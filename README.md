@@ -2,11 +2,11 @@
 
 A Claude Code plugin for conducting operations against the [Green Invoice MCP](https://github.com/danielrosehill/GreenInvoice-MCP) server — the unofficial MCP wrapper around the [Green Invoice](https://www.greeninvoice.co.il/) Israeli invoicing API.
 
-Bundles a skill that teaches Claude how to safely drive the ten consolidated MCP tools (`document`, `client`, `supplier`, `item`, `expense`, `payment`, `account`, `business`, `reference_data`, `webhook`) plus slash commands for the most common day-to-day workflows.
+Bundles a skill that teaches Claude how to safely drive the eleven consolidated MCP tools (`document`, `client`, `supplier`, `item`, `expense`, `payment`, `account`, `business`, `reference_data`, `webhook`, `sandbox`) plus slash commands for the most common day-to-day workflows.
 
 ## Prerequisite
 
-The Green Invoice MCP server must be installed and connected. See [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP) for installation and API-credential setup.
+The Green Invoice MCP server must be installed and connected. See [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP) for installation and API-credential setup. It is published on npm as [`greeninvoice-mcp`](https://www.npmjs.com/package/greeninvoice-mcp) (`npx -y greeninvoice-mcp`); this plugin is written against 0.4.0.
 
 ## Skills
 

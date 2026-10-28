@@ -9,18 +9,19 @@ This skill guides operations against the **Green Invoice MCP** server (unofficia
 
 ## Prerequisite
 
-The Green Invoice MCP server must be installed and connected. Tools are exposed under an `*greeninvoice*` namespace with ten consolidated entry points:
+The Green Invoice MCP server must be installed and connected. Tools are exposed under an `*greeninvoice*` namespace with eleven consolidated entry points (server: [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP), npm `greeninvoice-mcp`):
 
 - `account` — account info and settings
 - `business` — business config, numbering, file uploads
 - `client` — client CRUD, search, merge, balance
 - `document` — invoices, receipts, quotes (create, search, update, close, reopen, send, preview)
-- `expense` — expense tracking, drafts, accounting classifications
+- `expense` — expense tracking, drafts, accounting classifications, `upload_file` (a receipt image/PDF that Green Invoice OCRs into a draft)
 - `item` — product/service catalog
 - `payment` — payment forms, credit-card tokens, payment links
 - `reference_data` — business categories, countries, cities, FX rates
 - `supplier` — supplier CRUD, search, merge
 - `webhook` — webhook subscriptions
+- `sandbox` — test documents in Green Invoice's separate test environment (needs its own sandbox keys; never touches the real books)
 
 Each tool takes an `action` argument (e.g. `search`, `create`, `get`, `update`, `close`) plus action-specific parameters. If you are unsure which action a tool supports, call it with no arguments or with a deliberately invalid action to get a schema error listing the valid ones.
 
