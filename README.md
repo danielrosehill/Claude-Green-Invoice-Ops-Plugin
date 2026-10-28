@@ -11,6 +11,15 @@ The Green Invoice MCP server must be installed and connected. See [GreenInvoice-
 ## Skills
 
 - `greeninvoice-ops` — operational guide: tool layout, common workflows (create invoice, log expense, monthly summary), safety rules, Israeli VAT / date / currency conventions.
+- `gi-save-expense-from-email` — find a receipt in the inbox, download the attachment, upload it to Green Invoice (OCR draft), validate the details with the user.
+- `gi-setup-expense-mailhook` — guided setup so flagged or forwarded receipt emails land in Green Invoice automatically (Green Invoice's own mail-in address, or a custom inbound-mail webhook).
+- `gi-email-document` — email an issued document from the user's own mailbox with the PDF attached and a personal note, with or without Green Invoice's automatic emails.
+- `gi-generate-billing-document` — create invoices, receipts and quotes with the right type, and an English copy for clients abroad or English-speaking clients.
+- `gi-copy-to-drive` — copy generated documents and expense files into Google Drive folders, remembering which folder each type goes in.
+
+### Your tools and memory
+
+The workflow skills need an email tool and a file store that this plugin doesn't ship. They refer to them by role (`{{EMAIL_SEARCH}}`, `{{EMAIL_ATTACHMENT}}`, `{{EMAIL_SEND}}`, `{{FILE_STORE}}`, `{{FETCH}}`) and resolve them to whatever is connected, such as a Google Workspace MCP. Choices, Drive folder IDs and the mail-hook address are kept in a local JSON memory file whose location you choose on first run (default `~/.config/greeninvoice-ops/memory.json`, or set `$GREENINVOICE_OPS_MEMORY`). Details: [references/user-tools-and-memory.md](references/user-tools-and-memory.md).
 
 ## Commands
 
