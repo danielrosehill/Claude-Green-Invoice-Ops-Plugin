@@ -6,7 +6,7 @@ Bundles a skill that teaches Claude how to safely drive the eleven consolidated 
 
 ## Prerequisite
 
-The Green Invoice MCP server must be installed and connected. See [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP) for installation and API-credential setup. It is published on npm as [`greeninvoice-mcp`](https://www.npmjs.com/package/greeninvoice-mcp) (`npx -y greeninvoice-mcp`); this plugin is written against 0.5.0.
+The Green Invoice MCP server must be installed and connected. See [GreenInvoice-MCP](https://github.com/danielrosehill/GreenInvoice-MCP) for installation and API-credential setup. It is published on npm as [`greeninvoice-mcp`](https://www.npmjs.com/package/greeninvoice-mcp) (`npx -y greeninvoice-mcp`); this plugin is written against 0.5.1.
 
 ## Skills
 
