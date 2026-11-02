@@ -17,7 +17,7 @@ Uses tool placeholders `{{EMAIL_SEARCH}}`, `{{EMAIL_ATTACHMENT}}` and the plugin
 2. **Pick the attachment.** Prefer the PDF. Skip signature images and logos. If the expense is
    only in the email body (no attachment), say so; offer to log it with `expense` `action: create`
    by hand instead (the `/gi-log-expense` flow).
-3. **Download it** with `{{EMAIL_ATTACHMENT}}` as base64, or get a URL the MCP server can fetch.
+3. **Download it** with `{{EMAIL_ATTACHMENT}}` as base64, or get a URL the MCP server can fetch. For a local file, stage it with `cloud-storage:stage-file` (`stage.sh <file>` → presigned URL; `--bucket dsrholdings-transient` for business files; delete after). Don't improvise another route.
 4. **Check for a duplicate.** `expense` `action: search` and `action: search_drafts` for the
    same supplier and amount around that date. If one exists, show it and ask before continuing.
 5. **Upload.** `expense` `action: upload_file` with `{filename, contentType, file}` (or `url`).
