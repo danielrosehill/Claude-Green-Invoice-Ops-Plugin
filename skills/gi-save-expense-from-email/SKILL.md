@@ -20,19 +20,25 @@ Uses tool placeholders `{{EMAIL_SEARCH}}`, `{{EMAIL_ATTACHMENT}}` and the plugin
 3. **Download it** with `{{EMAIL_ATTACHMENT}}` as base64, or get a URL the MCP server can fetch. For a local file, stage it with `cloud-storage:stage-file` (`stage.sh <file>` → presigned URL; `--bucket dsrholdings-transient` for business files; delete after). Don't improvise another route.
 4. **Check for a duplicate.** `expense` `action: search` and `action: search_drafts` for the
    same supplier and amount around that date. If one exists, show it and ask before continuing.
-5. **Upload.** `expense` `action: upload_file` with `{filename, contentType, file}` (or `url`).
+5. **Fit the size limit.** The upload service's limit is 20 MB (`maxFileSize` 20971520, seen
+   2026-11-03; the presign response carries the current value). A PDF over it: save it locally and run
+   `${CLAUDE_PLUGIN_ROOT}/scripts/compress-pdf.sh <in.pdf> <out.pdf>` (Ghostscript; exit 0 when the
+   output fits, 2 when even the strongest preset doesn't: then split the PDF or upload only the
+   relevant pages). If it reports `gs` missing, run skill `gi-setup-environment`. An image over the
+   limit: convert it to PDF first, or downscale it. Upload the compressed file.
+6. **Upload.** `expense` `action: upload_file` with `{filename, contentType, file}` (or `url`).
    No `expenseId`, so Green Invoice OCRs it into an expense **draft** (5–60 s).
    - To attach the file to an expense that already exists instead, pass its `expenseId`.
-6. **Read the draft back.** Poll `expense` `action: search_drafts` until it appears (every ~10 s,
+7. **Read the draft back.** Poll `expense` `action: search_drafts` until it appears (every ~10 s,
    give up after ~90 s and tell the user it is still processing).
-7. **Validate with the user.** Show supplier, supplier tax ID, date, document number, amount,
+8. **Validate with the user.** Show supplier, supplier tax ID, date, document number, amount,
    currency, VAT and suggested category next to what the email itself says. Flag differences
    (OCR often misreads VAT, foreign currency and dates in DD/MM vs MM/DD).
-8. **Fix and approve.** Correct fields the user changes. Drafts are approved by a human in the
+9. **Fix and approve.** Correct fields the user changes. Drafts are approved by a human in the
    Green Invoice app; if the user wants it fully recorded now, create the expense with
    `expense` `action: create` from the confirmed values and attach the file with
    `upload_file` + `expenseId`. Confirm the payload before any `create`.
-9. **Report** the draft or expense ID and what is left for the user to do in the app.
+10. **Report** the draft or expense ID and what is left for the user to do in the app.
 
 ## Notes
 

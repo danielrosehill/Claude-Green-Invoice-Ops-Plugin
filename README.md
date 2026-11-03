@@ -13,6 +13,7 @@ The Green Invoice MCP server must be installed and connected. See [GreenInvoice-
 - `greeninvoice-ops` — operational guide: tool layout, common workflows (create invoice, log expense, monthly summary), safety rules, Israeli VAT / date / currency conventions.
 - `gi-save-expense-from-email` — find a receipt in the inbox, download the attachment, upload it to Green Invoice (OCR draft), validate the details with the user.
 - `gi-setup-expense-mailhook` — guided setup so flagged or forwarded receipt emails land in Green Invoice automatically (Green Invoice's own mail-in address, or a custom inbound-mail webhook).
+- `gi-setup-environment` — check and install the local tools the bundled scripts need (Ghostscript, for `scripts/compress-pdf.sh`, which shrinks expense PDFs over the 20 MB upload limit), then verify.
 - `gi-email-document` — email an issued document from the user's own mailbox with the PDF attached and a personal note, with or without Green Invoice's automatic emails.
 - `gi-generate-billing-document` — create invoices, receipts and quotes with the right type, and an English copy for clients abroad or English-speaking clients.
 - `gi-copy-to-drive` — copy generated documents and expense files into Google Drive folders, remembering which folder each type goes in.

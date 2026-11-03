@@ -29,7 +29,7 @@ Ask which the user wants, recommending A if their plan has it:
     Make with an email trigger.
   - `{{GI_API_CREDENTIALS}}`: the Green Invoice API key ID and secret, stored in that platform's
     secret store, never in code.
-  - The handler, per attachment (PDF/PNG/JPG/GIF, ≤ 16 MB): get an OAuth token
+  - The handler, per attachment (PDF/PNG/JPG/GIF, up to the presign response's `maxFileSize`, 20 MB on 2026-11-03; a server-side handler can't compress, so it skips and logs larger files for `gi-save-expense-from-email`, which compresses them with `scripts/compress-pdf.sh`): get an OAuth token
     (`POST https://api.morning.co/idp/v1/oauth/token`, client credentials), get a presigned upload
     from `GET https://apigw.greeninvoice.co.il/file-upload/v1/url?context=expense&data={"source":5}`,
     POST the file to it (all returned fields first, file last). Green Invoice OCRs it into a draft.
